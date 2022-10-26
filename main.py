@@ -68,7 +68,7 @@ def hoodie(message):
     keyboard2 = types.InlineKeyboardMarkup()
     model1 = types.InlineKeyboardButton(text="Худи красное", callback_data='h_red')
     model2 = types.InlineKeyboardButton(text="Худи зеленое", callback_data='h_green')
-    model3 = types.InlineKeyboardButton(text="Худи синее", callback_data='h_blue')
+    model3 = types.InlineKeyboardButton(text="Худи ебучее", callback_data='h_blue')
     keyboard2.add(model1, model2, model3)
     mess2 = "Какая модель"
     bot.send_message(message.chat.id, text=mess2, reply_markup=keyboard2, parse_mode='html')
