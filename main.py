@@ -1,82 +1,148 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import telebot
 import types
 from telebot import types
 
-import socks
-import urllib3
-from urllib3.contrib.socks import SOCKSProxyManager
 
+bot = telebot.TeleBot('5664614354:AAGn8lPRmOXytJkPXaZwAWYdWLmE9V4m8Ok')
+CHANNEL_NAME = '@Python_sales_bot'
+PAYMENTS_TOKEN = '381764678:TEST:44295'
+MODEL = ''
+SIZE = ''
+
+
+# import socks
+# import urllib3
+# from urllib3.contrib.socks import SOCKSProxyManager
+#
 # proxy = SOCKSProxyManager('socks5h://10.2.45.34:8080/')
 # proxy.request('GET', 'http://api.telegram.org)/')
-
+#
 # proxy = urllib3.ProxyManager('http://10.2.45.34:8080/')
 # r1 = proxy.request('GET', 'http://api.telegram.org/')
 # r2 = proxy.request('GET', 'http://httpbin.org/')
 # len(proxy.pools)
-
+#
 # proxy = socks.socksocket()
 # proxy.set_proxy(socks.SOCKS5, "socks.example.com") # uses default port 1080
 # proxy.set_proxy(socks.HTTP, "10.2.45.34", 8080)
 # proxy.connect(("10.2.45.34", 8080))
-
-bot = telebot.TeleBot('5664614354:AAGn8lPRmOXytJkPXaZwAWYdWLmE9V4m8Ok')
-CHANNEL_NAME = '@Python_sales_bot'
-PAYMENTS_TOKEN = '381764678:TEST:44295'  # Завести платежку
-
+#
+#
 # f = open('data/fun.txt', 'r', encoding='UTF-8')
 # jokes = f.read().split('\n')
 # f.close()
-
+#
 # message.text.strip().lower() обрезка от лишних пробелов и приведение к нижнему регистру
+
 
 @bot.message_handler(commands=['start'])
 def start(message):
-    mess = f'Саламалекум, <b>{message.from_user.first_name}</b> <u>{message.from_user.last_name}</u>, туту вступление \n<b>НУЖНА ФОТКА 640х360</b> вроде. \nЗ.Ы. Саня когда в доту заебал?'
+    mess = f'Саламалекум, <b>{message.from_user.first_name} {message.from_user.last_name}</b>, \n<i>НУЖНА ФОТКА 640х360</i> вроде. Про-то где можно забрать вещь надо написать или выдавать геолокацию например. Надо проверить как бот будет общаться в <u>группе</u>.'
     bot.send_message(message.from_user.id, mess, parse_mode='html')
-    shop_main_menu(message)
+    menu(message)
+
+
+@bot.message_handler(commands=['help'])
+def help(message):
+    bot.send_message(message.from_user.id, "Я умею общаться только с помощью меню и кнопок")
+
+
+@bot.message_handler(commands=['deletebot'])
+def stop(message):
+    mess = f'Дотвидания, <b>{message.from_user.first_name} {message.from_user.last_name}</b>, или просто - петук!'
+    bot.send_message(message.from_user.id, mess, parse_mode='html')
+    bot.stop_bot()                                                                          # разобраться с отключением и нужна ли команда start в меню и help отдельным
 
 
 @bot.message_handler(commands=['shop'])
-def shop_main_menu(message):
-    keyboard1 = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=3)
-    clothes1 = types.KeyboardButton("Одежда1")
-    lectures1 = types.KeyboardButton("Лекции1")
-    accessories1 = types.KeyboardButton("Акссесуары1")
-    keyboard1.add(clothes1, lectures1, accessories1)
-    mess1 = f"<i><u><b>Я знаю три твоих ID</b></u></i>\nmessage.id: {message.id}\nmessage.from_user.id {message.from_user.id}\nmessage.chat.id {message.chat.id}\nПо какому айди отправлять сообщения обратно? \n{message.from_user.is_bot}\nНадо сверить айди с саней"
-    bot.send_message(message.chat.id, text=mess1, reply_markup=keyboard1, parse_mode='html')
-
-    keyboard2 = types.InlineKeyboardMarkup()
-    clothes2 = types.InlineKeyboardButton(text="Одежда2", callback_data='clothes')
-    lectures2 = types.InlineKeyboardButton(text="Лекции2", callback_data='lectures')
-    accessories2 = types.InlineKeyboardButton(text="Акссесуары2", callback_data='accessories')
-    keyboard2.add(clothes2, lectures2, accessories2)
-    mess2 = 'Бот ли ты:\nТы написал: ' + message.text + ' - сказал ревизор'
-    bot.send_message(message.chat.id, text=mess2, reply_markup=keyboard2)
+def menu(message):
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=3)
+    keyboard.add(types.KeyboardButton("Одежда"),
+                 types.KeyboardButton("Лекции"),
+                 types.KeyboardButton("Аксессуары"))
+    mess = "Наш магазин предоставляет выбор одежды, что бы вы хотели купить?"
+    bot.send_message(message.from_user.id, mess, reply_markup=keyboard)
 
 
 def clothes(message):
-    keyboard1 = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=3)
-    hoodie = types.KeyboardButton("Худи")
-    t_shirts = types.KeyboardButton("Футболки")
-    keyboard1.add(hoodie, t_shirts)
-    mess1 = "Что интересует, худи или футболки?"
-    bot.send_message(message.chat.id, text=mess1, reply_markup=keyboard1, parse_mode='html')
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
+    keyboard.add(types.KeyboardButton("Худи"),
+                 types.KeyboardButton("Футболки"),
+                 types.KeyboardButton("Назад в меню"))
+    mess = "Что интересует, худи или футболки?"
+    bot.send_message(message.from_user.id, mess, reply_markup=keyboard)
+
+
+def lectures(message):
+    bot.send_message(message.from_user.id, "Ждём блок-схему по лекциям")                            #блок схемы?
+
+
+def accessories(message):
+    bot.send_message(message.from_user.id, "Ждём блок-схему по аксессуарам")
 
 
 def hoodie(message):
-    keyboard2 = types.InlineKeyboardMarkup()
-    model1 = types.InlineKeyboardButton(text="Худи красное", callback_data='h_red')
-    model2 = types.InlineKeyboardButton(text="Худи зеленое", callback_data='h_green')
-    model3 = types.InlineKeyboardButton(text="Худи ебучее", callback_data='h_blue')
-    keyboard2.add(model1, model2, model3)
-    mess2 = "Какая модель"
-    bot.send_message(message.chat.id, text=mess2, reply_markup=keyboard2, parse_mode='html')
+    hoodie_red = types.InlineKeyboardMarkup().add(types.InlineKeyboardButton(text="Худи красное", callback_data='hoodie_red'))  # написать цикл который будет автоматизировать это дерьмо
+    hoodie_green = types.InlineKeyboardMarkup().add(types.InlineKeyboardButton(text="Худи зеленое", callback_data='hoodie_green'))  # брать из бд name и url и подставлять в цикл
+    hoodie_blue = types.InlineKeyboardMarkup().add(types.InlineKeyboardButton(text="Худи синее", callback_data='hoodie_blue'))
+    bot.send_photo(message.from_user.id, 'https://cdn.lmbd.ru/f9544273-7f6e-4a3a-be00-7de234aea05a/', reply_markup=hoodie_red)
+    bot.send_photo(message.from_user.id, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSluo1fj_JwKYRv6isrE1CgMH0PX5ev7Bsl5Q&usqp=CAU', reply_markup=hoodie_green)
+    bot.send_photo(message.from_user.id, 'https://img.championat.com/s/735x490/news/big/z/c/istoriya-priznaniya-hudi_163482210596339940.jpg', reply_markup=hoodie_blue)
 
 
-@bot.message_handler(commands=['buy'])                                                         # РАЗОБРАТЬСЯ С ПОКУПКОЙ
+def shirts(message):
+    shirts_yellow = types.InlineKeyboardMarkup().add(types.InlineKeyboardButton(text="Футболка желтая", callback_data='shirts_yellow'))
+    shirts_turquoise = types.InlineKeyboardMarkup().add(types.InlineKeyboardButton(text="Футболка бирюзовая", callback_data='shirts_turquoise'))
+    shirts_purple = types.InlineKeyboardMarkup().add(types.InlineKeyboardButton(text="Футболка фиолетовая", callback_data='shirts_purple'))
+    bot.send_photo(message.from_user.id, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTk1AgahQq7a0XFI77brN4NSoUJKcKoe46bg&usqp=CAU', reply_markup=shirts_yellow)
+    bot.send_photo(message.from_user.id, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6AYpVPadneV562f5gaMiKixcj9oGtrGxwDg&usqp=CAU', reply_markup=shirts_turquoise)
+    bot.send_photo(message.from_user.id, 'https://stockmann.ru/istk/6ZmjWDRX83ltP025pjAzpV2UIyu11H3P0cM0CGk-44A/rs:fit:344:516:0/g:ce/bG9jYWw6Ly8vdXBsb2FkL2libG9jay80MjQvNTEwMjA4N18xLkpQRw.jpg', reply_markup=shirts_purple)
+
+# import glob, os, random
+# files = []
+# for ext in ["png", "jpg", "jpeg"]:
+#   [files.append(file) for file in glob.glob(f"*.{ext}")]
+#
+# random_file = files[random.randint(0, len(files)-1)]                                                            # Доделать красивый вывод
+#
+#
+# Отправить можно так:
+# @bot.callback_query_handler(func=lambda call: True)
+# def callback_inline(call):
+#   if call.data == 'men':
+#     with open(random_file, 'rb') as f:
+#       bot.send_media_group(call.message.chat.id, [InputMediaPhoto(f)])
+
+def size(message):                                                                    # хз как сделать чтобы те размеры которых уже нет не показывались в кнопках
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=3)
+    keyboard.add(types.KeyboardButton("S"),
+                 types.KeyboardButton("M"),
+                 types.KeyboardButton("L"),
+                 types.KeyboardButton("Назад к одежде"))
+    mess = "{MODEL}, а какой размер?"                                                           # Как правильно передавать модель для отображения!?
+    bot.send_message(message.from_user.id, mess, reply_markup=keyboard)
+
+
+@bot.message_handler(commands=['buy'])                                                      # РАЗОБРАТЬСЯ С ОПЛАТОЙ И ПЛАТЕЖКОЙ Один вблок в который передавать size model
 def buy(message: types.Message):
-    PRICE = types.LabeledPrice(label="СЮДА ДЕНЬГИ СУКААААААА", amount=500*100)
+    PRICE = types.LabeledPrice(label="СЮДА ДЕНЬГИ СУКААААААА", amount=3000*100)
+    bot.send_invoice(message.from_user.id,
+                     title=f"{MODEL} {SIZE}",
+                     description="На самом деле ты можешь получить только пизды, ну я про купон на куни",
+                     photo_url='http://pm1.narvii.com/7092/d6f96da5a0210aafb9f06c77ec4845b4bed315bar1-720-1042v2_uhq.jpg',
+                     photo_width=200,
+                     photo_height=150,
+                     photo_size=300,
+                     provider_token=PAYMENTS_TOKEN,
+                     currency="rub",
+                     prices=[PRICE],
+                     is_flexible=False,
+                     need_phone_number=True,
+                     invoice_payload="test-invoice-payload")
+
     # mess = types.InputInvoiceMessageContent(title="Купон на куни",
     #                                         description="что тут не понятного, зачем тут описание",
     #                                         photo_url='',
@@ -90,21 +156,16 @@ def buy(message: types.Message):
     #                                         need_phone_number=True,
     #                                         payload="test-invoice-payload")
     #
-    # bot.send_message(message.chat.id, text="\nInputInvoiceMessageContent\n", reply_markup=types.InlineKeyboardMarkup().add(mess), parse_mode='html')
+    # bot.send_message(message.from_user.id, text="\nInputInvoiceMessageContent\n", reply_markup=types.InlineKeyboardMarkup().add(mess), parse_mode='html')
 
-    bot.send_invoice(message.chat.id,
-                     title="Купон на куни",
-                     description="что тут не понятного, зачем тут описание",
-                     photo_url='https://klike.net/uploads/posts/2020-09/1601279291_17.jpg',
-                     photo_width=300,
-                     photo_height=150,
-                     photo_size=300,
-                     provider_token=PAYMENTS_TOKEN,
-                     currency="rub",
-                     prices=[PRICE],
-                     is_flexible=False,
-                     need_phone_number=True,
-                     invoice_payload="test-invoice-payload")
+
+    # keyboard2 = types.InlineKeyboardMarkup()
+    # clothes2 = types.InlineKeyboardButton(text="Одежда2", callback_data='clothes')
+    # lectures2 = types.InlineKeyboardButton(text="Лекции2", callback_data='lectures')
+    # accessories2 = types.InlineKeyboardButton(text="Акссесуары2", callback_data='accessories')
+    # keyboard2.add(clothes2, lectures2, accessories2)
+    # mess2 = 'Бот ли ты:\nТы написал: ' + message.text + ' - сказал ревизор'
+    # bot.send_message(message.from_user.id, text=mess2, reply_markup=keyboard2)
 
 
 # @bot.pre_checkout_query_handler(lambda query: True)
@@ -118,66 +179,57 @@ def buy(message: types.Message):
 #     for k, v in payment_info.items():
 #         print(f"{k} = {v}")
 #
-#     bot.send_message(message.chat.id, f"Платёж на сумму {message.successful_payment.total_amount // 100} {message.successful_payment.currency} прошёл успешно!!!")
+#     bot.send_message(message.from_user.id, f"Платёж на сумму {message.successful_payment.total_amount // 100} {message.successful_payment.currency} прошёл успешно!!!")
 
 
-@bot.callback_query_handler(func=lambda call: True)
+@bot.callback_query_handler(func=lambda call: True)                                                  # разобраться с lambda как это работает
 def callback_worker(call):
-    if call.data == "yes":
-        bot.send_message(call.message.chat.id, 'жуй два')
-    elif call.data == "no":
-        bot.send_message(call.message.chat.id, 'нет нет')
-    elif call.data == "clothes":
-        bot.send_message(call.message.chat.id, 'сработал clothes')
-        # bot.next_step_backend(clothes)
-    elif call.data == "Одежда1":
-        bot.send_message(call.message.chat.id, 'сработал Одежда1')
-        # bot.next_step_backend(clothes)
-    elif call.data == "Худи":
-        bot.next_step_backend(hoodie)
-    elif call.data == "h_red":
-        bot.send_message(call.message.chat.id, 'размер красного худака')
-    elif call.data == "h_green":
-        bot.send_message(call.message.chat.id, 'размер зеленого худака')
-    elif call.data == "h_blue":
-        bot.send_message(call.message.chat.id, 'размер синего худака')
+    global MODEL
+    MODEL = call
+    size(call)
 
 
-# @bot.message_handler(content_types=['text', 'document', 'audio'])
-# def get_text_messages(message):
-#     if message.text == "Кнопки":
-#         keyboard = types.InlineKeyboardMarkup()
-#         key_yes = types.InlineKeyboardButton(text='Да', callback_data='yes')
-#         keyboard.add(key_yes)
-#         key_no = types.InlineKeyboardButton(text='Нет', callback_data='no')
-#         keyboard.add(key_no)
-#         question = "ты нажал кнопки"
-#         bot.send_message(message.from_user.id, text=question, reply_markup=keyboard)
-#     elif message.text == "Привет":
-#         bot.send_message(message.chat.id, "Привет, чем я могу тебе помочь?    chat.id")
-#     else:
-#         bot.send_message(message.from_user.id, "Я тебя не понимаю. Напиши /help.")
+@bot.message_handler(content_types=['text', 'voice', 'photo', 'video', 'audio', 'document', 'sticker'])
+def get_text_messages(message):
+    global SIZE
+    if message.voice:
+        bot.send_message(message.from_user.id, 'Я в метро, наушников нет, напиши плиз сообщение')
+    elif message.photo:
+        bot.send_message(message.from_user.id, 'Классная фотка')
+    elif message.video:
+        bot.send_message(message.from_user.id, 'Видео как видео, мне больше другого типа нравятся')
+    elif message.audio:
+        bot.send_message(message.from_user.id, 'Потом послушаю')
+    elif message.document:
+        bot.send_message(message.from_user.id, 'Ну и что в нем? Сценарий к 2023?')
+    elif message.sticker:
+        bot.send_message(message.from_user.id, 'Мне впадлу искать для тебя стикер')
+    elif message.text == "Назад в меню":
+        menu(message)
+    elif message.text == "Одежда" or message.text == "Назад к одежде":
+        clothes(message)
+    elif message.text == "Лекции":
+        lectures(message)
+    elif message.text == "Аксессуары":
+        accessories(message)
+    elif message.text == "Худи":
+        hoodie(message)
+    elif message.text == "Футболки":
+        shirts(message)
+    elif message.text == "S" or message.text == "L" or message.text == "M":
+        SIZE = message
+        buy(message)
+    else:
+        bot.send_message(message.from_user.id, "Это что-то на иврите? Я не понимаю. Напиши /help.")
 
 
-@bot.message_handler(commands=['help'])
-def help(message):
-    bot.send_message(message.from_user.id, "Я пока нихуя не умею     from_user.id")
-    bot.send_message(message.chat.id, "Я пока нихуя не умею     chat.id")
+bot.polling(none_stop=True)                                                    # разобраться с аргументами , interval=0, skip_pending=False, allowed_updates=[]
+# bot.infinity_polling()                                                        # Просто надо не bot.infinity_polling(), а вебхук настроить
 
 
-@bot.message_handler(commands=['deletebot'])
-def stop(message):
-    mess = f'дотвидания, <b>{message.from_user.first_name}</b> <u>{message.from_user.last_name}</u>, или просто петук!'
-    bot.send_message(message.from_user.id, mess, parse_mode='html')
-    bot.stop_bot()
+def print_hi(name):
+    print(f'БОТ {name}')
 
 
-bot.polling(none_stop=True)  # разобраться с аргументами , interval=0, skip_pending=False, allowed_updates=[]
-# bot.infinity_polling()
-
-# def print_hi(name):
-#     print(f'Hi, {name}')
-#
-#
-# if __name__ == '__main__':
-#     print_hi('PyCharm')
+if __name__ == '__main__':
+    print_hi('ЗАПУЩЕН!')
