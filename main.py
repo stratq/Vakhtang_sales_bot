@@ -7,6 +7,10 @@ from telebot import types
 
 bot = telebot.TeleBot('5664614354:AAGn8lPRmOXytJkPXaZwAWYdWLmE9V4m8Ok')
 PAYMENTS_TOKEN = '381764678:TEST:44295'
+global list_mess
+global list_add
+list_mess = []
+list_add = []
 # PAYMENTS_TOKEN = '401643678:TEST:337a0c19-863c-4175-a31f-2cc1b1f88196'
 # PAYMENTS_TOKEN = '284685063:TEST:ZGJlZjkwNWU1NThj'
 
@@ -144,7 +148,7 @@ goods = [Good('hoodie', 'Худи oversize', 'https://downloader.disk.yandex.ru/
 @bot.message_handler(commands=['start'])
 def start(message):
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
-    keyboard.add(types.KeyboardButton("Боже, храни ВТФМ!\u2764\uFE0F❤❤!"))
+    keyboard.add(types.KeyboardButton("Боже, храни ВТФМ! \u2764\uFE0F❤❤"))
     mess = 'Дорогие друзья! Мы рады приветсвовать Вас на ВТФМ 2022!'
     bot.send_message(message.from_user.id, mess, reply_markup=keyboard)
 
@@ -234,11 +238,11 @@ def checkout(checkout_q):
 @bot.message_handler(content_types=['successful_payment'])
 def successful_payment(message):
     bot.send_sticker(chat_id=message.from_user.id, sticker='CAACAgIAAxkBAAEGFbVje2QQ_w5QhFFMUowHORFG4vI-pQAC1B0AAqdekUu4h9vEFWLtyisE')
-    bot.send_message('-882047975', f'\tИмя в телеграм:\n<b>{message.from_user.first_name, message.from_user.last_name, message.from_user.username}</b>\n'
-                                   f'\tИмя при оплате:<b><font color=green>\n{message.successful_payment.order_info.name}</font></b>\n'
-                                   f'\tОплатил:\n<b>{message.successful_payment.invoice_payload}</b>\n'
-                                   f'\tСтоимостью:\n<b>{message.successful_payment.total_amount/100} RUB</b>\n'
-                                   f'\tНомер телефона:\n<b>{message.successful_payment.order_info.phone_number}</b>', reply_markup=types.ReplyKeyboardRemove(), parse_mode='html')
+    bot.send_message('-1001485436799', f'\tИмя в телеграм:\n<b>{message.from_user.first_name, message.from_user.last_name, message.from_user.username}</b>\n'
+                                       f'\tИмя при оплате:<b>\n{message.successful_payment.order_info.name}</b>\n'
+                                       f'\tОплатил:\n<b>{message.successful_payment.invoice_payload}</b>\n'
+                                       f'\tСтоимостью:\n<b>{message.successful_payment.total_amount/100} RUB</b>\n'
+                                       f'\tНомер телефона:\n<b>{message.successful_payment.order_info.phone_number}</b>', reply_markup=types.ReplyKeyboardRemove(), parse_mode='html')
 
 
 @bot.callback_query_handler(func=lambda call: True)
@@ -246,51 +250,47 @@ def callback_worker(call):
     buy(call, search_good(call.data))
 
 
-@bot.message_handler(chat_types=['group'])
-def get_text_messages(message):
-    if message.chat.id == -882047975 and message.text == '/наличие товаров':
-        bot.send_message('-882047975', "Через это меню можно будет менять наличие любого товара.", reply_markup=types.ReplyKeyboardRemove())
-        for good in goods:
-            bot.send_message('-882047975', f'{good.name} = {good.availability_text}')
-        bot.send_message('-882047975', 'Для смены отображения в боте наличия того или иного товара нужно:\n'
-                                       'Переслать один из товаров выше в этот же чат с надписью "+" или "-".\n'
-                                       '\t"+" есть в наличии\n'
-                                       '\t"-" нет в наличии.')
-    elif message.chat.id == -882047975 and (message.text == '-' or message.text == '+') and message.reply_to_message:
-        for good in goods:
-            if message.reply_to_message.text == f'{good.name} = {good.availability_text}' and good.availability:
-                good.availability = False
-                good.availability_text = 'нет в наличии'
-                bot.send_message('-882047975', f'{good.name} = {good.availability_text}', reply_to_message_id=message.id)
-            elif message.reply_to_message.text == f'{good.name} = {good.availability_text}' and not good.availability:
-                good.availability = True
-                good.availability_text = 'есть'
-                bot.send_message('-882047975', f'{good.name} = {good.availability_text}', reply_to_message_id=message.id)
-    else:
-        bot.send_message(message.chat.id, "Я вам тут не мешаю?", reply_markup=types.ReplyKeyboardRemove())
-
-
 @bot.message_handler(content_types=['text', 'voice', 'photo', 'video', 'audio', 'document', 'sticker'])
 def get_text_messages(message):
-    # if message.chat.id == -882047975 and message.text == '/наличие товаров':
-    #     bot.send_message('-882047975', "Через это меню можно будет менять наличие любого товара.", reply_markup=types.ReplyKeyboardRemove())
-    #     for good in goods:
-    #         bot.send_message('-882047975', f'{good.name} = {good.availability_text}')
-    #     bot.send_message('-882047975', 'Для смены отображения в боте наличия того или иного товара нужно:\n'
-    #                                    'Переслать один из товаров выше в этот же чат с надписью "+" или "-".\n'
-    #                                    '\t"+" есть в наличии\n'
-    #                                    '\t"-" нет в наличии.')
-    # elif message.chat.id == -882047975 and (message.text == '-' or message.text == '+') and message.reply_to_message:
-    #     for good in goods:
-    #         if message.reply_to_message.text == f'{good.name} = {good.availability_text}' and good.availability:
-    #             good.availability = False
-    #             good.availability_text = 'нет в наличии'
-    #             bot.send_message('-882047975', f'{good.name} = {good.availability_text}', reply_to_message_id=message.id)
-    #         elif message.reply_to_message.text == f'{good.name} = {good.availability_text}' and not good.availability:
-    #             good.availability = True
-    #             good.availability_text = 'есть'
-    #             bot.send_message('-882047975', f'{good.name} = {good.availability_text}', reply_to_message_id=message.id)
-    if message.voice:
+    global list_mess
+    global list_add
+    k = 1
+    if message.chat.id == -1001485436799 and message.text == '/наличие':
+        if list_mess:
+            for i in list_mess:
+                bot.delete_message(-1001485436799, i)
+            list_mess = []
+        if list_add:
+            for i in list_add:
+                bot.delete_message(-1001485436799, i)
+            list_add = []
+        list_mess.append(message.message_id)
+        bot.send_message('-1001485436799', "Через это меню можно будет менять наличие любого товара.", reply_markup=types.ReplyKeyboardRemove())
+        list_mess.append(message.message_id+k)
+        for good in goods:
+            k += 1
+            bot.send_message('-1001485436799', f'{good.name} = {good.availability_text}')
+            list_mess.append(message.message_id+k)
+        bot.send_message('-1001485436799', 'Для смены отображения в боте наличия того или иного товара нужно:\n'
+                                           'Переслать один из товаров выше в этот же чат с надписью "+" или "-".\n'
+                                           '\t"+" есть в наличии\n'
+                                           '\t"-" нет в наличии.')
+        list_mess.append(message.message_id+k+1)
+    elif message.chat.id == -1001485436799 and message.reply_to_message:
+        for good in goods:
+            if message.text == '-' and message.reply_to_message.text == f'{good.name} = {good.availability_text}' and good.availability:
+                good.availability = False
+                good.availability_text = 'нет в наличии'
+                bot.send_message('-1001485436799', f'{good.name} = {good.availability_text}', reply_to_message_id=message.id)
+                list_add.append(message.message_id)
+                list_add.append(message.message_id+1)
+            elif message.text == '+' and message.reply_to_message.text == f'{good.name} = {good.availability_text}' and not good.availability:
+                good.availability = True
+                good.availability_text = 'есть'
+                bot.send_message('-1001485436799', f'{good.name} = {good.availability_text}', reply_to_message_id=message.id)
+                list_add.append(message.message_id)
+                list_add.append(message.message_id+1) # 527557405
+    elif message.voice:
         bot.send_message(message.from_user.id, 'Я в метро, наушников нет...')
     elif message.photo:
         bot.send_message(message.from_user.id, 'Классная фотка!')
@@ -302,7 +302,7 @@ def get_text_messages(message):
         bot.send_message(message.from_user.id, 'Ну и что в нем? Сценарий к 2023?')
     elif message.sticker:
         bot.send_message(message.from_user.id, 'Я тоже мог бы отправить тебе стикер, НО не буду')
-    elif message.text == "Боже, храни ВТФМ!\u2764\uFE0F❤❤!":
+    elif message.text == "Боже, храни ВТФМ! \u2764\uFE0F❤❤":
         start2(message)
     elif message.text == "Привет БОТ!":
         start3(message)
@@ -318,7 +318,8 @@ def get_text_messages(message):
         mess = 'Коллега, этот бот умеет только продавать... Познакомимся с Ассортиментом ВТФМ 2022?'
         bot.send_message(message.from_user.id, mess, reply_markup=keyboard)
     else:
-        bot.send_message(message.from_user.id, "Это что-то на иврите? Я не понимаю. Напиши /help.")
+        if not message.chat.id == -1001485436799:
+            bot.send_message(message.from_user.id, "Это что-то на иврите? Я не понимаю. Напиши /help.")
 
 
 bot.infinity_polling()
@@ -330,4 +331,4 @@ def print_hi(name):
 
 if __name__ == '__main__':
     print_hi('ПРЕКРАТИЛ РАБОТУ!')
-    bot.send_message('-882047975', "БОТ ПРЕКРАТИЛ РАБОТУ!!!")
+    bot.send_message('-1001485436799', "БОТ ПРЕКРАТИЛ РАБОТУ!!!")
