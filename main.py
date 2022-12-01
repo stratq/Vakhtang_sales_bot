@@ -5,116 +5,9 @@ import telebot
 import types
 from telebot import types
 
-bot = telebot.TeleBot('5664614354:AAGn8lPRmOXytJkPXaZwAWYdWLmE9V4m8Ok')
-PAYMENTS_TOKEN = '381764678:TEST:44295'
+bot = telebot.TeleBot('5810807628:AAFbLp5CQpn-YANuVytQbUqPBplKW8semqw')
+PAYMENTS_TOKEN = '381764678:TEST:46304'
 GROUP_CHAT_ID = -1001485436799
-global list_mess
-global list_add
-list_mess = []
-list_add = []
-# PAYMENTS_TOKEN = '401643678:TEST:337a0c19-863c-4175-a31f-2cc1b1f88196'
-# PAYMENTS_TOKEN = '284685063:TEST:ZGJlZjkwNWU1NThj'
-
-
-# global ITEM
-# import pandas as pd
-# raise TypeError(f'Object of type {o.__class__.__name__} '
-# TypeError: Object of type int64 is not JSON serializable
-# df = pd.read_csv("data.txt", sep=';')
-# print(df, '\n')
-# print(df.info(), '\n')
-# df['ID'] = df['ID'].astype(str)
-# df['NAME'] = df['NAME'].astype(str)
-# df['PHOTO'] = df['PHOTO'].astype(str)
-# df['DESCRIPTION'] = df['DESCRIPTION'].astype(str)
-# print(df.info(), '\n')
-# print(df['NAME'])
-# print(df['NAME'][0])
-# print(len(df))
-# for i in range(len(df)):
-#     if df['IS_CLOTHES'][i]:
-#         pad = types.InlineKeyboardMarkup().add(types.InlineKeyboardButton(text=df['NAME'][i], callback_data=df['ID'][i]))
-#         bot.send_photo(message.from_user.id, open(df['PHOTO'][i], 'rb'), reply_markup=pad)
-# for i in range(len(df)):
-#     if not df['IS_CLOTHES'][i]:
-#         pad = types.InlineKeyboardMarkup().add(types.InlineKeyboardButton(text=df['NAME'][i], callback_data=df['ID'][i]))
-#         bot.send_photo(message.from_user.id, open(df['PHOTO'][i], 'rb'), reply_markup=pad)
-# mess = f"{df['NAME'][ITEM]}, а какой размер?"
-# photo_url=f"{df['PHOTO'][ITEM]}",
-# title=df['NAME'][ITEM] + str(df['HAS_SIZE'][ITEM]),
-# description=df['DESCRIPTION'][ITEM],
-# prices=[types.LabeledPrice(label=df['NAME'][ITEM], amount=df['PRICE'][ITEM]*100)],
-# for i in range(len(df)):
-#     if df['ID'][i] == call.data:
-#         ITEM = i
-# if call.data == 'hoodie' or call.data == 'shirt':
-#     size(call)
-# else:
-#     buy(call)
-# if df['ID'][ITEM] == 'hoodie' or df['ID'][ITEM] == 'shirt':
-#     df.loc['HAS_SIZE', ITEM] = message.text
-
-# elif message.text == "M" or message.text == "L" or message.text == "XL":
-#     if ITEM.id == 'hoodie' or ITEM.id == 'shirt':
-#         ITEM.has_size = message.text
-#         buy(message)
-#     else:
-#         bot.send_message(message.from_user.id, 'Сначала выбери вещь')
-#         menu(message)
-
-#
-# def change_availability(message):
-#     for good in goods:
-#         bot.send_message(527557405, f'{good.name} = {good.availability}')
-#     bot.send_message(527557405, 'Для смены отображения в боте наличия того или иного товара нужно выбрать')
-
-# bot.send_message(message.from_user.id,
-#                  f"Платёж на сумму {message.successful_payment.total_amount / 100} {message.successful_payment.currency} прошёл успешно!!!",
-#                  parse_mode='Markdown')
-
-# bot.send_message(message.from_user.id, '💌', reply_markup=types.ReplyKeyboardRemove())
-
-# global ITEM
-# for good in goods:
-#     if good.name == call.data:
-#         buy(call, good)
-        # ITEM = good
-# if call.data == 'hoodie' or call.data == 'shirt':
-    # size(call)
-# else:
-#     buy(call, ITEM)
-
-# @bot.message_handler(commands=['deletebot'])
-# def stop(message):
-#     mess = f'ДЕЛАТЬ ЧТОБЫ ПО ЭТОЙ КОМАНДЕ БОТ УДАЛЯЛСЯ?</b>'
-#     bot.send_message(message.from_user.id, mess, parse_mode='html')
-
-
-# def size(message):
-#     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=3)
-#     keyboard.add(types.KeyboardButton("M"),
-#                  types.KeyboardButton("L"),
-#                  types.KeyboardButton("XL"),
-#                  types.KeyboardButton("Назад в меню"))
-#     mess = f"{ITEM.name}, а какой размер?"
-#     bot.send_message(message.from_user.id, mess, reply_markup=keyboard)
-
-# Про-то где можно забрать вещь надо написать или выдавать геолокацию например.
-# заблочить ли возможность пересылать блок Buy
-# Как сделать чтобы некоторые кнопки срабатывали только в определенном месте , reply_to_message_id=message.from_user.id)
-# bot.polling(none_stop=True)   # разобраться с аргументами , interval=0, skip_pending=False|True, allowed_updates=[]
-# Просто надо не bot.infinity_polling(), а вебхук настроить
-# while True:
-#     pass
-# может выдавать весь асортимент сразу, там не таку уж много
-# НУЖНА ФОТКА 640х360 или GIF 320х180 вроде, название и логин бота
-# нужны нормальные фотки, количетсво вещей каждого (типа/вида/размера), стоимость
-# хз как сделать чтобы те размеры (и модели) которых уже нет - не показывались в кнопках
-# разобраться с отключением и нужна ли команда start в меню и help отдельным
-# сделать чтобы клава скрывалась и был фокус на покупку
-# мб стоит поменять текст ПЛатёж на сумму 300 рублей прошёл успешно, или вообще убрать надпись и оставить только стикер
-# 1111 1111 1111 1026 12/22 000
-# 2200 0000 0000 0053 12/14 123
 
 
 class Good:
@@ -129,28 +22,23 @@ class Good:
         self.availability_text = availability_text
 
 
-goods = [Good('hoodie', 'Худи oversize', 'https://downloader.disk.yandex.ru/preview/e8ffd5e66f6e48e6b68d87e3a1424ace5c0813e4c6f813c36d90b5ab97c79835/637e228f/rfxXmPbxn4XpIWyLBCMqqYQEwxCg4I2e0_B2dpixROBfKhpOOVBEII0AcpGlJrApNxYxKX7HHKs5VErryCFbyw%3D%3D?uid=0&filename=%D0%A5%D1%83%D0%B4%D0%B8.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Описание худака', 300, True),
-         Good('shirt', 'Футболка oversize', 'https://downloader.disk.yandex.ru/preview/7e63314552b363b88a7dbe49d49167b03d27d88ea517116fcda8275ca1e59a48/637e2275/zaG-o_OWA_lKVdmEbCXrN35OkJChHTg5HmV7a3Dy_UwDK780O1zkNTuo9B8S7mADP9pvFY_yTXMmPsC90zMOGA%3D%3D?uid=0&filename=%D0%A4%D1%83%D1%82%D0%B1%D0%BE%D0%BB%D0%BA%D0%B0.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Описание футболки', 200, True),
-         Good('shirt', 'Футболка oversize long', 'https://downloader.disk.yandex.ru/preview/7e63314552b363b88a7dbe49d49167b03d27d88ea517116fcda8275ca1e59a48/637e2275/zaG-o_OWA_lKVdmEbCXrN35OkJChHTg5HmV7a3Dy_UwDK780O1zkNTuo9B8S7mADP9pvFY_yTXMmPsC90zMOGA%3D%3D?uid=0&filename=%D0%A4%D1%83%D1%82%D0%B1%D0%BE%D0%BB%D0%BA%D0%B0.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Описание футболки', 200, True),
-         Good('sock', 'Носки one size', 'https://downloader.disk.yandex.ru/preview/1983eb668beafad9126bbd7912503f465eac88cbc36b5ee19401e5fb7cc10cbd/637e21f9/vR0yglLIvLHWmU9BOSZcCNOiNFoh7dGQoW_rj8KjDfd8ftRf8h2eumm-KrOAWZY8AOjIF1IZCyXritQtcVO3dQ%3D%3D?uid=0&filename=%D0%9D%D0%BE%D1%81%D0%BA%D0%B8.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Описание носков', 500, True),
-         Good('hat', 'Шапка', 'https://downloader.disk.yandex.ru/preview/f92f71efeff9ed905b72808040add379e2c94aed58ff535cc569a069e63b1ec3/637e2131/CBSeuMWTOpTyAoiiJcIKtGZDamRRtza3VurjjY4Uzv_uapKUTQgFiRBiu77rzc0gJE5q2KnDGGmwewLnQAs1Rg%3D%3D?uid=0&filename=hat.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Описание шапки', 800, True),
-         Good('notebook', 'Блокнот', 'https://downloader.disk.yandex.ru/preview/565269cac7e19e9a350189f0324879d4122da050ffe1cfde65cc3ccc13ad7ff2/637e2192/SW7a7zwm6hg0dqYp80uuOD2rt87r17JLMLTG5rRd9CWqSgbQNud5w2HgECYZSLCTfVR7bjZBh8uSSQ3ktoP2eA%3D%3D?uid=0&filename=%D0%91%D0%BB%D0%BE%D0%BA%D0%BD%D0%BE%D1%82.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Описание блокнота', 300, False),
-         Good('doping1', 'Таблетница 1', 'https://downloader.disk.yandex.ru/preview/01e03ed032957cdc504edd507fdbaa933cbb007eacfff8fa1d95f7e9faace11d/637e21aa/MN2Bk29cAHuWL9RicuyW435OkJChHTg5HmV7a3Dy_UzR055kEF4j7TxbCU6SBGEp5Bmi3GbDKZ7c2Em8lEbasw%3D%3D?uid=0&filename=%D0%94%D0%BE%D0%BF%D0%B8%D0%BD%D0%B31.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Описание таблетницы 1', 200, False),
-         Good('doping2', 'Таблетница 2', 'https://downloader.disk.yandex.ru/preview/4b887b7e9d6afdc67ef1314838f81075c409c226fc1bfd1276b63a3ee719c517/637e21be/QHxQE270CVgBXe0vbECRvdOiNFoh7dGQoW_rj8KjDfdNaQ7S6xu74MvQyzGOreZ1_gsj1g06JklHV9N9ggCoRg%3D%3D?uid=0&filename=%D0%94%D0%BE%D0%BF%D0%B8%D0%BD%D0%B32.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Описание таблетницы 2', 200, False),
-         Good('cup', 'Кружка', 'https://downloader.disk.yandex.ru/preview/5759990749c9dfaf3adfa8c2426e056ee5d8770cbbfb6f2ae0528fb41ae20ae3/637e21d7/54udLxnJw_YfCcz1RLIhYn5OkJChHTg5HmV7a3Dy_UzsTzCQUyHhkrkg9aNXi0EbyDHMNQJihh5i_PCo1YbnkQ%3D%3D?uid=0&filename=%D0%9A%D1%80%D1%83%D0%B6%D0%BA%D0%B0.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=0&tknv=v2&size=2048x2048', 'Описание кружки', 400, False),
-         Good('therm_mug', 'Термокружка', 'https://downloader.disk.yandex.ru/preview/48521d21551cd76981de819c835d92a46feb3b18caf63720d216635c7d99374d/637e2235/cl8slIqwhSnrUtW9m_aDY9OiNFoh7dGQoW_rj8KjDfdV00_bUnI_sOu8xzFxBd7TEhpojkn3BjlsRhQNrLfHfw%3D%3D?uid=0&filename=%D0%A2%D0%B5%D1%80%D0%BC%D0%BE%D0%BA%D1%80%D1%83%D0%B6%D0%BA%D0%B0.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=0&tknv=v2&size=2048x2048', 'Описание термокружки', 450, False),
-         Good('plaid', 'Плед', 'https://downloader.disk.yandex.ru/preview/f37921d4b99cd2df6bdb09855fb702da553fead34774281d394d0b2592419937/637e220b/hRwzepJKQBDDh_qjer2VTtPL9EKIhaHyIz0Lq1cpNRTO1SXzOBFZ8RIcpNCty1aT1cpIKPLO2ATd4ieCKITFBw%3D%3D?uid=0&filename=%D0%9F%D0%BB%D0%B5%D0%B4.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Описание пледа', 500, False),
-         Good('stickers', 'Стикеры', 'https://downloader.disk.yandex.ru/preview/59443195dd28e81fb0015e5c5e88376be86eebb99b9894960d6579695ba11a78/637e221b/yJH_ATwgWZXudrsWliezcZ58w0pTF3LtEav6JWhRlHVMycwHnmEmZzGFg4a_yVbDlx-NTeGrOBJ4-9ik10EXzg%3D%3D?uid=0&filename=%D0%A1%D1%82%D0%B8%D0%BA%D0%B5%D1%80%D1%8B.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Описание стикеров', 100, False),
-         Good('ball', 'Новогодний шар', 'https://downloader.disk.yandex.ru/preview/f6448ab4e5cbd04aeb1315b8d6ca15601baed2000487af770f7ed3ba52e89546/637e22a2/pA5zBOz1fuxOwT6yucvbqdOiNFoh7dGQoW_rj8KjDfezLvaGv6EJjIUzYBPGn6__EegygdvD8bSkwtX8VvvQlw%3D%3D?uid=0&filename=%D0%A8%D0%B0%D1%80.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Описание новогоднего шара',    250,    False),
-         Good('shopper1', 'Шопер 1', 'https://downloader.disk.yandex.ru/preview/c7f9695f25f3831b9de6c73ec6071e377cfcdc1e38606ea997c678f0f0160945/637e22ba/b5oOeI0p5ds9Cv3xjkuKYp58w0pTF3LtEav6JWhRlHVMYSty31aWaTppZhPEB3STtwSMjKeQFGuUBId3Z0tJkQ%3D%3D?uid=0&filename=%D0%A8%D0%BE%D0%BF%D0%B5%D1%801.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Описание шопера 1', 999, False),
-         Good('shopper2', 'Шопер 2', 'https://downloader.disk.yandex.ru/preview/0f73f7bc69d1f246eac745ce000bfeac5e1d102f26554c0472e84da573a7abf2/637e22cd/nVLtOjqqkW8XXdDZT7YWvtOiNFoh7dGQoW_rj8KjDfe2EedX-ayFSav7CyHg731OUMU5TtTL5als8KuKezOaRw%3D%3D?uid=0&filename=%D0%A8%D0%BE%D0%BF%D0%B5%D1%802.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Описание шопера 2', 500, False)]
+goods = [Good('hoodie', 'Худи oversize', 'https://downloader.disk.yandex.ru/preview/e8ffd5e66f6e48e6b68d87e3a1424ace5c0813e4c6f813c36d90b5ab97c79835/637e228f/rfxXmPbxn4XpIWyLBCMqqYQEwxCg4I2e0_B2dpixROBfKhpOOVBEII0AcpGlJrApNxYxKX7HHKs5VErryCFbyw%3D%3D?uid=0&filename=%D0%A5%D1%83%D0%B4%D0%B8.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Худи черный оверсайз “Мы справимся”', 4500, True),
+         Good('shirt', 'Футболка oversize', 'https://downloader.disk.yandex.ru/preview/7e63314552b363b88a7dbe49d49167b03d27d88ea517116fcda8275ca1e59a48/637e2275/zaG-o_OWA_lKVdmEbCXrN35OkJChHTg5HmV7a3Dy_UwDK780O1zkNTuo9B8S7mADP9pvFY_yTXMmPsC90zMOGA%3D%3D?uid=0&filename=%D0%A4%D1%83%D1%82%D0%B1%D0%BE%D0%BB%D0%BA%D0%B0.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Футболка черная оверсайз “Продюсер”', 2500, True),
+         Good('shirt', 'Футболка oversize long', 'https://downloader.disk.yandex.ru/preview/7e63314552b363b88a7dbe49d49167b03d27d88ea517116fcda8275ca1e59a48/637e2275/zaG-o_OWA_lKVdmEbCXrN35OkJChHTg5HmV7a3Dy_UwDK780O1zkNTuo9B8S7mADP9pvFY_yTXMmPsC90zMOGA%3D%3D?uid=0&filename=%D0%A4%D1%83%D1%82%D0%B1%D0%BE%D0%BB%D0%BA%D0%B0.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Футболка черная оверсайз - лонг “Продюсер”', 2500, True),
+         Good('sock', 'Носки one size', 'https://downloader.disk.yandex.ru/preview/72bef04504007d0b16250428569d783638b9a594531eab47b5568a249b62c3fd/63891a18/vR0yglLIvLHWmU9BOSZcCNOiNFoh7dGQoW_rj8KjDfd8ftRf8h2eumm-KrOAWZY8AOjIF1IZCyXritQtcVO3dQ%3D%3D?uid=0&filename=%D0%9D%D0%BE%D1%81%D0%BA%D0%B8.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Носки черные универсального размера с надписью “Тренируй душу - ходи в театр”', 550, True),
+         Good('hat', 'Шапка', 'https://downloader.disk.yandex.ru/preview/2d7b11d124471f10693a8341ade1edf4ef64c8ac3dfa20bebef9880d1dca8aad/63891a43/CBSeuMWTOpTyAoiiJcIKtGZDamRRtza3VurjjY4Uzv_uapKUTQgFiRBiu77rzc0gJE5q2KnDGGmwewLnQAs1Rg%3D%3D?uid=0&filename=hat.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Шапка черная с вышивкой “Продюсер”', 1500, True),
+         Good('doping', 'Таблетница', 'https://downloader.disk.yandex.ru/preview/bea5c5d2a0a349c741cd23b55f4a4e74d82ff69170ce75e4439d6d15b744acf6/63891b21/QHxQE270CVgBXe0vbECRvdOiNFoh7dGQoW_rj8KjDfdNaQ7S6xu74MvQyzGOreZ1_gsj1g06JklHV9N9ggCoRg%3D%3D?uid=0&filename=%D0%94%D0%BE%D0%BF%D0%B8%D0%BD%D0%B32.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Драже аскорбиновой кислоты в металлической коробке “Для тех, кто уже не вывозит”', 350, False),
+         Good('therm_mug', 'Термокружка', 'https://downloader.disk.yandex.ru/preview/2cfc80d2eb778bb3d5c6718e780594d9ca8276b49b976a0167a1ea560a29c5e4/63891b45/cl8slIqwhSnrUtW9m_aDY9OiNFoh7dGQoW_rj8KjDfdV00_bUnI_sOu8xzFxBd7TEhpojkn3BjlsRhQNrLfHfw%3D%3D?uid=0&filename=%D0%A2%D0%B5%D1%80%D0%BC%D0%BE%D0%BA%D1%80%D1%83%D0%B6%D0%BA%D0%B0.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=0&tknv=v2&size=2048x2048', 'Термостакан софт-тач с гравировкой “У меня антракт”', 1550, False),
+         Good('plaid', 'Плед', 'https://downloader.disk.yandex.ru/preview/5e5298df389adb191541e0562857f98ac1c9daf42840fa08f160fe4bcdd66d76/63891b60/hRwzepJKQBDDh_qjer2VTtPL9EKIhaHyIz0Lq1cpNRTO1SXzOBFZ8RIcpNCty1aT1cpIKPLO2ATd4ieCKITFBw%3D%3D?uid=0&filename=%D0%9F%D0%BB%D0%B5%D0%B4.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Плед флисовый с вышивкой на бирке “Теплый прием”', 1500, False),
+         Good('ball', 'Новогодний шар', 'https://downloader.disk.yandex.ru/preview/82d7b2a2bbccc2308a79dc70f5a83f7a5da3ce0af210977991a2041ead10453d/63891b7f/pA5zBOz1fuxOwT6yucvbqdOiNFoh7dGQoW_rj8KjDfezLvaGv6EJjIUzYBPGn6__EegygdvD8bSkwtX8VvvQlw%3D%3D?uid=0&filename=%D0%A8%D0%B0%D1%80.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Елочный шар “С любовью, ВФТМ”', 550, False),
+         Good('shopper', 'Шоппер', 'https://downloader.disk.yandex.ru/preview/530683eceb4218df8bbd688447a88f7df557ab564f2c9e89e87bb3ed8db0dfd7/63891bac/nVLtOjqqkW8XXdDZT7YWvtOiNFoh7dGQoW_rj8KjDfe2EedX-ayFSav7CyHg731OUMU5TtTL5als8KuKezOaRw%3D%3D?uid=0&filename=%D0%A8%D0%BE%D0%BF%D0%B5%D1%802.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Шоппер из чёрной саржи с принтом “Реквизит”', 850, False)]
 
 
 @bot.message_handler(commands=['start'])
 def start(message):
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
-    keyboard.add(types.KeyboardButton("Боже, храни ВТФМ! \u2764\uFE0F❤❤"))
-    mess = 'Дорогие друзья! Мы рады приветсвовать Вас на ВТФМ 2022!'
+    keyboard.add(types.KeyboardButton("Боже, храни ВФТМ! \u2764\uFE0F\u2764\uFE0F\u2764\uFE0F"))
+    mess = 'Дорогие друзья! Мы рады приветствовать Вас на ВФТМ 2022!'
     bot.send_message(message.from_user.id, mess, reply_markup=keyboard)
 
 
@@ -167,23 +55,17 @@ def start3(message):
                                            '- Выбирай мерч для себя и друзей\n\n'
                                            '- Оплачивай прямо здесь\n\n'
                                            '- Волонтер принесет и торжественно вручит покупку!\n\n'
-                                           '- Только самовывоз и только во время проведения ВТФМ 8-12 декабря😎', reply_markup=types.ReplyKeyboardRemove())
+                                           '- Только самовывоз и только во время проведения ВФТМ 8-12 декабря😎', reply_markup=types.ReplyKeyboardRemove())
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
     keyboard.add(types.KeyboardButton("ДА!"), types.KeyboardButton("НЕТ!"))
-    mess = 'Познакомимся с Ассортиментом ВТФМ 2022?'
+    mess = 'Познакомимся с Ассортиментом ВФТМ 2022?'
     bot.send_message(message.from_user.id, mess, reply_markup=keyboard)
-
-
-@bot.message_handler(commands=['help'])
-def help(message):
-    bot.send_message(message.from_user.id, "Я умею общаться только с помощью меню и кнопок")
-
 
 @bot.message_handler(commands=['shop'])
 def menu(message):
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
-    keyboard.add(types.KeyboardButton("Одежда"), types.KeyboardButton("Сувенирка ВФТМ"))
-    mess = "Одежда или сувениры?"
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=3)
+    keyboard.add(types.KeyboardButton("Одежда"), types.KeyboardButton("Сувенирка ВФТМ"), types.KeyboardButton("Лекции"))
+    mess = "Одежда, сувениры или лекции?"
     bot.send_message(message.from_user.id, mess, reply_markup=keyboard)
 
 
@@ -232,7 +114,7 @@ def buy(message, good):
 
 @bot.pre_checkout_query_handler(lambda query: True)
 def checkout(checkout_q):
-    mess = "Извините, кто-то только что купил последний такой товар, пока вы заполняли платежные реквизиты."
+    mess = "Извините, кто-то только что купил последний такой товар."
     bot.answer_pre_checkout_query(checkout_q.id, ok=search_good(checkout_q.invoice_payload).availability, error_message=mess)
 
 
@@ -253,44 +135,24 @@ def callback_worker(call):
 
 @bot.message_handler(content_types=['text', 'voice', 'photo', 'video', 'audio', 'document', 'sticker'])
 def get_text_messages(message):
-    global list_mess
-    global list_add
-    k = 1
     if message.chat.id == GROUP_CHAT_ID and message.text == '/наличие':
-        if list_mess:
-            for i in list_mess:
-                bot.delete_message(GROUP_CHAT_ID, i)
-            list_mess = []
-        if list_add:
-            for i in list_add:
-                bot.delete_message(GROUP_CHAT_ID, i)
-            list_add = []
-        list_mess.append(message.message_id)
         bot.send_message(GROUP_CHAT_ID, "Через это меню можно будет менять наличие любого товара.", reply_markup=types.ReplyKeyboardRemove())
-        list_mess.append(message.message_id+k)
         for good in goods:
-            k += 1
             bot.send_message(GROUP_CHAT_ID, f'{good.name} = {good.availability_text}')
-            list_mess.append(message.message_id+k)
         bot.send_message(GROUP_CHAT_ID, 'Для смены отображения в боте наличия того или иного товара нужно:\n'
                                            'Переслать один из товаров выше в этот же чат с надписью "+" или "-".\n'
                                            '\t"+" есть в наличии\n'
                                            '\t"-" нет в наличии.')
-        list_mess.append(message.message_id+k+1)
     elif message.chat.id == GROUP_CHAT_ID and message.reply_to_message:
         for good in goods:
             if message.text == '-' and message.reply_to_message.text == f'{good.name} = {good.availability_text}' and good.availability:
                 good.availability = False
                 good.availability_text = 'нет в наличии'
                 bot.send_message(GROUP_CHAT_ID, f'{good.name} = {good.availability_text}', reply_to_message_id=message.id)
-                list_add.append(message.message_id)
-                list_add.append(message.message_id+1)
             elif message.text == '+' and message.reply_to_message.text == f'{good.name} = {good.availability_text}' and not good.availability:
                 good.availability = True
                 good.availability_text = 'есть'
                 bot.send_message(GROUP_CHAT_ID, f'{good.name} = {good.availability_text}', reply_to_message_id=message.id)
-                list_add.append(message.message_id)
-                list_add.append(message.message_id+1) # 527557405
     elif message.voice:
         bot.send_message(message.from_user.id, 'Я в метро, наушников нет...')
     elif message.photo:
@@ -303,7 +165,7 @@ def get_text_messages(message):
         bot.send_message(message.from_user.id, 'Ну и что в нем? Сценарий к 2023?')
     elif message.sticker:
         bot.send_message(message.from_user.id, 'Я тоже мог бы отправить тебе стикер, НО не буду')
-    elif message.text == "Боже, храни ВТФМ! \u2764\uFE0F❤❤":
+    elif message.text == "Боже, храни ВФТМ! \u2764\uFE0F\u2764\uFE0F\u2764\uFE0F":
         start2(message)
     elif message.text == "Привет БОТ!":
         start3(message)
@@ -313,14 +175,16 @@ def get_text_messages(message):
         clothes(message)
     elif message.text == "Сувенирка ВФТМ":
         accessories(message)
+    elif message.text == "Лекции":
+        bot.send_message(message.from_user.id, 'http://vftmfest.ru/lecture')
     elif message.text == "НЕТ!":
         keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
         keyboard.add(types.KeyboardButton("Ну давайте!"), types.KeyboardButton("НЕТ!"))
-        mess = 'Коллега, этот бот умеет только продавать... Познакомимся с Ассортиментом ВТФМ 2022?'
+        mess = 'Коллега, этот бот умеет только продавать... Познакомимся с Ассортиментом ВФТМ 2022?'
         bot.send_message(message.from_user.id, mess, reply_markup=keyboard)
     else:
         if not message.chat.id == GROUP_CHAT_ID:
-            bot.send_message(message.from_user.id, "Это что-то на иврите? Я не понимаю. Напиши /help.")
+            bot.send_message(message.from_user.id, "Я умею общаться только с помощью меню и кнопок")
 
 
 bot.infinity_polling()
@@ -332,4 +196,4 @@ def print_hi(name):
 
 if __name__ == '__main__':
     print_hi('ПРЕКРАТИЛ РАБОТУ!')
-    bot.send_message('GROUP_CHAT_ID', "БОТ ПРЕКРАТИЛ РАБОТУ!!!")
+    bot.send_message(GROUP_CHAT_ID, "БОТ ПРЕКРАТИЛ РАБОТУ!!!")
