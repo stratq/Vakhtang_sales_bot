@@ -4,23 +4,31 @@
 import telebot
 import types
 from telebot import types
+import pandas as pd
 
-bot = telebot.TeleBot('5664614354:AAGn8lPRmOXytJkPXaZwAWYdWLmE9V4m8Ok')
-PAYMENTS_TOKEN = '381764678:TEST:44295'
-global list_mess
-global list_add
-list_mess = []
-list_add = []
+bot = telebot.TeleBot('5810807628:AAFbLp5CQpn-YANuVytQbUqPBplKW8semqw')
+PAYMENTS_TOKEN = '381764678:TEST:46304'
+# global list_mess
+# global list_add
+# list_mess = []
+# list_add = []
 # PAYMENTS_TOKEN = '401643678:TEST:337a0c19-863c-4175-a31f-2cc1b1f88196'
 # PAYMENTS_TOKEN = '284685063:TEST:ZGJlZjkwNWU1NThj'
 
 
 # global ITEM
-# import pandas as pd
 # raise TypeError(f'Object of type {o.__class__.__name__} '
 # TypeError: Object of type int64 is not JSON serializable
-# df = pd.read_csv("data.txt", sep=';')
-# print(df, '\n')
+df = pd.read_csv("availability.txt", sep=';')
+data = pd.DataFrame({'NAME': ['Худи oversize', 'Футболка oversize', 'Футболка oversize long', 'Носки one size', 'Шапка',
+                              'Таблетница 1', 'Таблетница 2', 'Термокружка', 'Плед', 'Новогодний шар', 'Шопер'],
+                     'HAVE': ['есть', 'есть', 'есть', 'есть', 'есть',
+                              'есть', 'есть', 'есть', 'есть', 'есть', 'есть']})
+
+print(df, '\n')
+print(data, '\n')
+df.to_excel('./have.xlsx')
+
 # print(df.info(), '\n')
 # df['ID'] = df['ID'].astype(str)
 # df['NAME'] = df['NAME'].astype(str)
@@ -133,23 +141,19 @@ goods = [Good('hoodie', 'Худи oversize', 'https://downloader.disk.yandex.ru/
          Good('shirt', 'Футболка oversize long', 'https://downloader.disk.yandex.ru/preview/7e63314552b363b88a7dbe49d49167b03d27d88ea517116fcda8275ca1e59a48/637e2275/zaG-o_OWA_lKVdmEbCXrN35OkJChHTg5HmV7a3Dy_UwDK780O1zkNTuo9B8S7mADP9pvFY_yTXMmPsC90zMOGA%3D%3D?uid=0&filename=%D0%A4%D1%83%D1%82%D0%B1%D0%BE%D0%BB%D0%BA%D0%B0.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Описание футболки', 200, True),
          Good('sock', 'Носки one size', 'https://downloader.disk.yandex.ru/preview/1983eb668beafad9126bbd7912503f465eac88cbc36b5ee19401e5fb7cc10cbd/637e21f9/vR0yglLIvLHWmU9BOSZcCNOiNFoh7dGQoW_rj8KjDfd8ftRf8h2eumm-KrOAWZY8AOjIF1IZCyXritQtcVO3dQ%3D%3D?uid=0&filename=%D0%9D%D0%BE%D1%81%D0%BA%D0%B8.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Описание носков', 500, True),
          Good('hat', 'Шапка', 'https://downloader.disk.yandex.ru/preview/f92f71efeff9ed905b72808040add379e2c94aed58ff535cc569a069e63b1ec3/637e2131/CBSeuMWTOpTyAoiiJcIKtGZDamRRtza3VurjjY4Uzv_uapKUTQgFiRBiu77rzc0gJE5q2KnDGGmwewLnQAs1Rg%3D%3D?uid=0&filename=hat.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Описание шапки', 800, True),
-         Good('notebook', 'Блокнот', 'https://downloader.disk.yandex.ru/preview/565269cac7e19e9a350189f0324879d4122da050ffe1cfde65cc3ccc13ad7ff2/637e2192/SW7a7zwm6hg0dqYp80uuOD2rt87r17JLMLTG5rRd9CWqSgbQNud5w2HgECYZSLCTfVR7bjZBh8uSSQ3ktoP2eA%3D%3D?uid=0&filename=%D0%91%D0%BB%D0%BE%D0%BA%D0%BD%D0%BE%D1%82.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Описание блокнота', 300, False),
          Good('doping1', 'Таблетница 1', 'https://downloader.disk.yandex.ru/preview/01e03ed032957cdc504edd507fdbaa933cbb007eacfff8fa1d95f7e9faace11d/637e21aa/MN2Bk29cAHuWL9RicuyW435OkJChHTg5HmV7a3Dy_UzR055kEF4j7TxbCU6SBGEp5Bmi3GbDKZ7c2Em8lEbasw%3D%3D?uid=0&filename=%D0%94%D0%BE%D0%BF%D0%B8%D0%BD%D0%B31.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Описание таблетницы 1', 200, False),
          Good('doping2', 'Таблетница 2', 'https://downloader.disk.yandex.ru/preview/4b887b7e9d6afdc67ef1314838f81075c409c226fc1bfd1276b63a3ee719c517/637e21be/QHxQE270CVgBXe0vbECRvdOiNFoh7dGQoW_rj8KjDfdNaQ7S6xu74MvQyzGOreZ1_gsj1g06JklHV9N9ggCoRg%3D%3D?uid=0&filename=%D0%94%D0%BE%D0%BF%D0%B8%D0%BD%D0%B32.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Описание таблетницы 2', 200, False),
-         Good('cup', 'Кружка', 'https://downloader.disk.yandex.ru/preview/5759990749c9dfaf3adfa8c2426e056ee5d8770cbbfb6f2ae0528fb41ae20ae3/637e21d7/54udLxnJw_YfCcz1RLIhYn5OkJChHTg5HmV7a3Dy_UzsTzCQUyHhkrkg9aNXi0EbyDHMNQJihh5i_PCo1YbnkQ%3D%3D?uid=0&filename=%D0%9A%D1%80%D1%83%D0%B6%D0%BA%D0%B0.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=0&tknv=v2&size=2048x2048', 'Описание кружки', 400, False),
          Good('therm_mug', 'Термокружка', 'https://downloader.disk.yandex.ru/preview/48521d21551cd76981de819c835d92a46feb3b18caf63720d216635c7d99374d/637e2235/cl8slIqwhSnrUtW9m_aDY9OiNFoh7dGQoW_rj8KjDfdV00_bUnI_sOu8xzFxBd7TEhpojkn3BjlsRhQNrLfHfw%3D%3D?uid=0&filename=%D0%A2%D0%B5%D1%80%D0%BC%D0%BE%D0%BA%D1%80%D1%83%D0%B6%D0%BA%D0%B0.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=0&tknv=v2&size=2048x2048', 'Описание термокружки', 450, False),
          Good('plaid', 'Плед', 'https://downloader.disk.yandex.ru/preview/f37921d4b99cd2df6bdb09855fb702da553fead34774281d394d0b2592419937/637e220b/hRwzepJKQBDDh_qjer2VTtPL9EKIhaHyIz0Lq1cpNRTO1SXzOBFZ8RIcpNCty1aT1cpIKPLO2ATd4ieCKITFBw%3D%3D?uid=0&filename=%D0%9F%D0%BB%D0%B5%D0%B4.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Описание пледа', 500, False),
-         Good('stickers', 'Стикеры', 'https://downloader.disk.yandex.ru/preview/59443195dd28e81fb0015e5c5e88376be86eebb99b9894960d6579695ba11a78/637e221b/yJH_ATwgWZXudrsWliezcZ58w0pTF3LtEav6JWhRlHVMycwHnmEmZzGFg4a_yVbDlx-NTeGrOBJ4-9ik10EXzg%3D%3D?uid=0&filename=%D0%A1%D1%82%D0%B8%D0%BA%D0%B5%D1%80%D1%8B.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Описание стикеров', 100, False),
-         Good('ball', 'Новогодний шар', 'https://downloader.disk.yandex.ru/preview/f6448ab4e5cbd04aeb1315b8d6ca15601baed2000487af770f7ed3ba52e89546/637e22a2/pA5zBOz1fuxOwT6yucvbqdOiNFoh7dGQoW_rj8KjDfezLvaGv6EJjIUzYBPGn6__EegygdvD8bSkwtX8VvvQlw%3D%3D?uid=0&filename=%D0%A8%D0%B0%D1%80.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Описание новогоднего шара',    250,    False),
-         Good('shopper1', 'Шопер 1', 'https://downloader.disk.yandex.ru/preview/c7f9695f25f3831b9de6c73ec6071e377cfcdc1e38606ea997c678f0f0160945/637e22ba/b5oOeI0p5ds9Cv3xjkuKYp58w0pTF3LtEav6JWhRlHVMYSty31aWaTppZhPEB3STtwSMjKeQFGuUBId3Z0tJkQ%3D%3D?uid=0&filename=%D0%A8%D0%BE%D0%BF%D0%B5%D1%801.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Описание шопера 1', 999, False),
-         Good('shopper2', 'Шопер 2', 'https://downloader.disk.yandex.ru/preview/0f73f7bc69d1f246eac745ce000bfeac5e1d102f26554c0472e84da573a7abf2/637e22cd/nVLtOjqqkW8XXdDZT7YWvtOiNFoh7dGQoW_rj8KjDfe2EedX-ayFSav7CyHg731OUMU5TtTL5als8KuKezOaRw%3D%3D?uid=0&filename=%D0%A8%D0%BE%D0%BF%D0%B5%D1%802.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Описание шопера 2', 500, False)]
+         Good('ball', 'Новогодний шар', 'https://downloader.disk.yandex.ru/preview/f6448ab4e5cbd04aeb1315b8d6ca15601baed2000487af770f7ed3ba52e89546/637e22a2/pA5zBOz1fuxOwT6yucvbqdOiNFoh7dGQoW_rj8KjDfezLvaGv6EJjIUzYBPGn6__EegygdvD8bSkwtX8VvvQlw%3D%3D?uid=0&filename=%D0%A8%D0%B0%D1%80.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Описание новогоднего шара', 250, False),
+         Good('shopper2', 'Шопер', 'https://downloader.disk.yandex.ru/preview/0f73f7bc69d1f246eac745ce000bfeac5e1d102f26554c0472e84da573a7abf2/637e22cd/nVLtOjqqkW8XXdDZT7YWvtOiNFoh7dGQoW_rj8KjDfe2EedX-ayFSav7CyHg731OUMU5TtTL5als8KuKezOaRw%3D%3D?uid=0&filename=%D0%A8%D0%BE%D0%BF%D0%B5%D1%802.png&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048', 'Описание шопера', 500, False)]
 
 
 @bot.message_handler(commands=['start'])
 def start(message):
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
     keyboard.add(types.KeyboardButton("Боже, храни ВТФМ! \u2764\uFE0F❤❤"))
-    mess = 'Дорогие друзья! Мы рады приветсвовать Вас на ВТФМ 2022!'
+    mess = 'Дорогие друзья! Мы рады приветсвовать Вас на ВФТМ 2022!'
     bot.send_message(message.from_user.id, mess, reply_markup=keyboard)
 
 
